@@ -6,8 +6,8 @@ import numpy as np
 
 
 class PeopleCounter:
-    def __init__(self, model_name="yolo11s_custom_v1.pt", tracker="botsort.yaml", device="cuda:0"):
-        self.model = YOLO(f'yolo_models/{model_name}')
+    def __init__(self, model_path="detect/exp/weights/best.pt", tracker="botsort.yaml", device="cuda:0"):
+        self.model = YOLO(model_path)
         self.names = self.model.names
         self.tracker = f'trackers/{tracker}'
         self.device = device
@@ -29,10 +29,10 @@ class PeopleCounter:
             if not ret:
                 break
 
-            pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-            gray_image = pil_image.convert("L")
-            gray_frame = cv2.cvtColor(np.array(gray_image), cv2.COLOR_GRAY2BGR)
-            frame = cv2.resize(gray_frame, (1020, 600))
+            # pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+            # gray_image = pil_image.convert("L")
+            # frame = cv2.cvtColor(np.array(gray_image), cv2.COLOR_GRAY2BGR)
+            frame = cv2.resize(frame, (1020, 600))
             results = self.model.track(
                 frame, persist=True, classes=1, tracker=self.tracker, device=self.device, imgsz=640)
 

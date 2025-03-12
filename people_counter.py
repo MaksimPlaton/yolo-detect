@@ -101,8 +101,3 @@ class PeopleCounter:
         if event == cv2.EVENT_MOUSEMOVE:
             point = [x, y]
             print(point)
-
-
-if __name__ == '__main__':
-    counter = PeopleCounter()
-    print(counter.process_video(240, 'data/172.mp4', grey=True))

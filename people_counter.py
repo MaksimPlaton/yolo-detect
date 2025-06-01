@@ -43,7 +43,6 @@ class PeopleCounter:
                 frame = cv2.cvtColor(
                     np.array(pil_image.convert("L")), cv2.COLOR_GRAY2BGR)
 
-            frame = cv2.resize(frame, (1020, 600))
             results = self.model.track(
                 frame, persist=True, classes=1, tracker=self.tracker, device=self.device, imgsz=640)
 
